@@ -1,5 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
+import bodyParser from "body-parser";
+import sequelize from './models/index.js';
 
 dotenv.config();
 
