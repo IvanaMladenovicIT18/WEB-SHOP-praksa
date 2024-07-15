@@ -5,7 +5,7 @@ import Category from './CategoryModel.js';
 const Product = sequelize.define(
     'Product',
     {
-        productID: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true

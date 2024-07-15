@@ -5,7 +5,7 @@ import User from './UserModel.js';
 const Order = sequelize.define(
     'Order',
     {
-        orderID: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true

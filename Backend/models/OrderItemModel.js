@@ -4,7 +4,7 @@ import Order from './OrderModel.js';
 import Product from './ProductModel.js';
 
 const OrderItem = sequelize.define('OrderItem', {
-    itemID: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
