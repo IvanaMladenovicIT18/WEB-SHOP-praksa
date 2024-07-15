@@ -4,7 +4,7 @@ import sequelize from './index.js';
 const Admin = sequelize.define(
   'Admin',
   {
-    adminID: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true

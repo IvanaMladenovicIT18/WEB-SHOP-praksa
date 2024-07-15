@@ -6,6 +6,10 @@ class ProductService {
         return await ProductRepository.findAll();
     }
 
+    async getAllProductsByCategory(categoryId) {
+        return await ProductRepository.findAllByCategory(categoryId);
+    }
+
     async getProductById(id) {
         return await ProductRepository.findById(id);
     }
