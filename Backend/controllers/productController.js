@@ -7,6 +7,17 @@ class ProductController {
         res.json(products);
     }
 
+    async getAllByCategory(req, res) {
+        try {
+            const { categoryId } = req.params;
+            const products = await ProductService.getAllProductsByCategory(categoryId);
+            res.json(products);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
+
     async getById(req, res) {
         const product = await ProductService.getProductById(req.params.id);
         if (product) {

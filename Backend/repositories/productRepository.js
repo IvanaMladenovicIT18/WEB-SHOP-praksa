@@ -6,6 +6,10 @@ class ProductRepository {
         return await Product.findAll();
     }
 
+    async findAllByCategory(categoryId) {
+        return await Product.findAll({ where: { categoryID: categoryId } });
+    }
+
     async findById(id) {
         return await Product.findByPk(id);
     }

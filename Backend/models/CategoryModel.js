@@ -4,7 +4,7 @@ import sequelize from './index.js';
 const Category = sequelize.define(
   'Category',
   {
-    categoryID: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
