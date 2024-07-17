@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/homeComponents/Header";
 import useProductStore from "../store/productStore";
+import useCartStore from "../store/cartStore";
 
 const SingleProduct = () => {
 
@@ -11,10 +12,15 @@ const SingleProduct = () => {
     const productId = params.id;
 
     const { loading, error, product, getProductById } = useProductStore();
+    const { addToCart } = useCartStore();
 
     useEffect(() => {
         getProductById(productId);
     }, [productId, getProductById]);
+
+    const AddToCartHandle = () => {
+      addToCart(product, parseInt(qty));
+    }
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -74,7 +80,7 @@ const SingleProduct = () => {
                               </select>
                             </div>
                             <button
-                            //   onClick={AddToCartHandle} - treba da dodam logiku za dodavanje proizvoda u korpu, local storage
+                              onClick={AddToCartHandle}
                               className="round-black-btn"
                             >
                               Dodaj u korpu
