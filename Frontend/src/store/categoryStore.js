@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { API_BASE_URL } from '../../constants';
 
 const useCategoryStore = create((set) => ({
     categories: [],
@@ -8,7 +9,7 @@ const useCategoryStore = create((set) => ({
     getAllCategories: async () => {
         set({ loading: true });
         try {
-            const response = await fetch('http://localhost:5000/api/categories');
+            const response = await fetch(`${API_BASE_URL}/categories`);
             const data = await response.json();
             set({ categories: data, loading: false });
         } catch (error) {
@@ -19,7 +20,7 @@ const useCategoryStore = create((set) => ({
     getCategoryById: async (id) => {
         set({ loading: true });
         try {
-          const response = await fetch(`https://api.example.com/categories/${id}`);
+          const response = await fetch(`${API_BASE_URL}/categories/${id}`);
           const data = await response.json();
           set({ loading: false });
           return data;
