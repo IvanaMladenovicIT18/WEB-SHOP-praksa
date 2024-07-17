@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 const useProductStore = create((set) => ({
     products: [],
+    product: null,
     loading: false,
     error: null,
 
@@ -17,6 +18,18 @@ const useProductStore = create((set) => ({
             set({ error: error.message, loading: false })
         }
     },
+
+    getProductById: async (id) => {
+        set({ loading: true });
+        try {
+          const response = await fetch(`http://localhost:5000/api/products/${id}`);
+          const data = await response.json();
+          set({ product: data, loading: false });
+        //   return data;
+        } catch (error) {
+          set({ error: error.message, loading: false });
+        }
+      },
 
     getProductsByCategory: async (categoryId) => {
         set({ loading: true });
