@@ -12,7 +12,7 @@ const Order = sequelize.define(
         },
         totalPrice: {
             type: DataTypes.DECIMAL(10, 2),
-            allowNull: false
+            allowNull: true
         },
         date: {
             type: DataTypes.DATEONLY,
@@ -29,7 +29,7 @@ const Order = sequelize.define(
 
 Order.belongsTo(User, {
     foreignKey: 'userID',
-    allowNull: false,
+    allowNull: true,
     onDelete: 'CASCADE'
 });
 
