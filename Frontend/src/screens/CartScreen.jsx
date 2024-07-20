@@ -2,10 +2,16 @@ import { Link } from "react-router-dom";
 import Header from "../components/homeComponents/Header";
 import useCartStore from "../store/cartStore";
 import Footer from "../components/homeComponents/Footer";
+import { useRef, useState } from "react";
+import ConfirmationDialog from "./ConfirmationDialog";
+import useOrderStore from "../store/orderStore";
 
 const CartScreen = () => {
 
-    const { cart, updateQuantity, deleteQuantity } = useCartStore();
+    const { cart, updateQuantity, deleteQuantity, clearCart } = useCartStore();
+    const { createOrder, error, order } = useOrderStore();
+    const modalRef = useRef(null);
+    const [notification, setNotification] = useState(null);
 
     const formattedNumber = (price) => {
         return new Intl.NumberFormat('sr-RS', { style: 'currency', currency: 'RSD', minimumFractionDigits: 2 }).format(price);
@@ -33,6 +39,41 @@ const CartScreen = () => {
     const handleDelete = (id) => {
         deleteQuantity(id);
     }
+
+    const handleOpenModal = () => {
+        const modalElement = modalRef.current;
+        if (modalElement) {
+            const modal = new window.bootstrap.Modal(modalElement);
+            modal.show();
+        }
+    };
+
+    const handleSaveChanges = async () => {
+        const userId = '1'; // kad uradim logovanje - zameni sa ulogovanim korisnikom
+        
+        const result = await createOrder(userId, cart);
+
+        if (result) {
+            setNotification({ message: 'Porudzbina uspesno kreirana!', type: 'success' });
+            clearCart();
+            const modalElement = modalRef.current;
+            if (modalElement) {
+                const modal = window.bootstrap.Modal.getInstance(modalElement);
+                modal.hide();
+            }
+            setTimeout(() => setNotification(null), 5000);
+        } else {
+            console.error('Kreiranje porudzbine nije uspelo: Nema rezultata');
+        }
+    };
+
+    const handleClose = () => {
+        const modalElement = modalRef.current;
+        if (modalElement) {
+            const modal = window.bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+        }
+    };
 
     return (
         <>
@@ -119,16 +160,26 @@ const CartScreen = () => {
                         </div>
                         {cart.length > 0 && (
                             <button
-                            //   onClick={AddToCartHandle}
+                              onClick={handleOpenModal}
                               className="round-black-btn"
                             >
                               Kreiraj porudzbinu
                         </button>      
                         )}
+                        {notification && (
+                            <div className={`alert alert-${notification.type} fixed-top mb-0`} role="alert">
+                                {notification.message}
+                            </div>
+                        )}
                                  
                     </div>
                 </div>
             </div> 
+            <ConfirmationDialog 
+                ref={modalRef} 
+                onSave={handleSaveChanges} 
+                onClose={handleClose} 
+            />
             <Footer/>  
         </>
     )
