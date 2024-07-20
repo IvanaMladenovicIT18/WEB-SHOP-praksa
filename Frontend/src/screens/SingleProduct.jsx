@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/homeComponents/Header";
 import useProductStore from "../store/productStore";
 import useCartStore from "../store/cartStore";
+import Footer from "../components/homeComponents/Footer";
 
 const SingleProduct = () => {
 
     const [qty, setQty] = useState(1);
 
+    const navigate = useNavigate();
     const params = useParams();
     const productId = params.id;
 
@@ -20,6 +22,7 @@ const SingleProduct = () => {
 
     const AddToCartHandle = () => {
       addToCart(product, parseInt(qty));
+      navigate("/cart");
     }
 
     if (loading) return <p>Loading...</p>;
@@ -70,7 +73,7 @@ const SingleProduct = () => {
                                 value={qty}
                                 onChange={(e) => setQty(e.target.value)}
                               >
-                                {[...Array(product.availableQuantity).keys()].map(
+                                {[...Array(Math.min(product.availableQuantity, 50)).keys()].map(
                                   (x) => (
                                     <option key={x + 1} value={x + 1}>
                                       {x + 1}
@@ -94,6 +97,7 @@ const SingleProduct = () => {
               </>
             ) : null}
           </div>
+          <Footer/>
         </>
       );
 }

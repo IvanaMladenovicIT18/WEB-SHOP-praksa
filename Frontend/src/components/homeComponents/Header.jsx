@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useCategoryStore from "../../store/categoryStore";
 import useProductStore from "../../store/productStore";
+import useCartStore from "../../store/cartStore";
 
 
 const Header = ({ onSelectCategory }) => {
 
+  const location = useLocation();
+
   const { categories, loading, error, getAllCategories, getCategoryById } = useCategoryStore();
   const { getAllProducts, getProductsByCategory } = useProductStore();
+  const { cart } = useCartStore();
   const [ selectedCategory, setSelectedCategory] = useState(null);
   
   useEffect(() => {
@@ -30,9 +34,10 @@ const Header = ({ onSelectCategory }) => {
       <div className="header">
         <div className="container">
         <div className="row">
-              <div className="col-md-3 col-4 d-flex align-items-center">
-                <Link className="navbar-brand" to="/">
+              <div className="webshop-name col-md-3 col-4 d-flex align-items-center">
+                <Link className="navbar-brand d-flex align-items-center" to="/">
                   <img alt="logo" src="/images/logo.png" onClick={() => handleCategoryClick(null)}/>
+                  <h1 className="col-md-6 align-items-center">FASHIONshop</h1>
                 </Link>
               </div>
               <div className="col-md-6 col-8 d-flex align-items-center">
@@ -67,14 +72,15 @@ const Header = ({ onSelectCategory }) => {
 
                 <Link to="/cart">
                   <i className="fas fa-shopping-bag"></i>
-                  <span className="badge">5</span>
+                  <span className="badge">{cart.length}</span>
                 </Link>
               </div>
             </div>
         </div>
       </div>
       {/* Categories of product */}
-      <div className="Category ">
+      {location.pathname === '/' && (
+        <div className="Category ">
         <div className="container">
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
@@ -114,6 +120,8 @@ const Header = ({ onSelectCategory }) => {
           </div>
         </div>
       </div>
+      )}
+      
     </div>
   );
 };

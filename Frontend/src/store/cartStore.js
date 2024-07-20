@@ -15,6 +15,20 @@ const useCartStore = create((set) => ({
         }
         localStorage.setItem('cart', JSON.stringify(updatedCart));
         return { cart: updatedCart };
+    }),
+
+    updateQuantity: (productId, newQuantity) => set((state) => {
+        const updatedCart = state.cart.map((item) => 
+            item.id === productId ? { ...item, quantity: newQuantity } : item
+        )
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        return { cart: updatedCart };
+    }),
+
+    deleteQuantity: (productId) => set((state) => {
+        const updatedCart = state.cart.filter(item => item.id !== productId);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        return { cart: updatedCart };
     })
 
 }));
