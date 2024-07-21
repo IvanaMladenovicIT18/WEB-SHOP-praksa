@@ -4,6 +4,10 @@ import ProductRepository from './../repositories/productRepository.js';
 
 class OrderService {
 
+    async getAllOrdersByUser(userId) {
+        return await OrderRepository.findAllByUser(userId);
+    }
+
     async getOrderById(id) {
         return await OrderRepository.findOrderById(id);
     }

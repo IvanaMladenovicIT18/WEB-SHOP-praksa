@@ -2,6 +2,10 @@ import Order from './../models/OrderModel.js';
 
 class OrderRepository {
 
+    async findAllByUser(userId) {
+        return await Order.findAll({ where: { userID: userId } });
+    }
+
     async findOrderById(id) {
         return await Order.findByPk(id);
     }

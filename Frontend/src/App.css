@@ -336,3 +336,11 @@ textarea:focus {
   align-items: center; 
   justify-content: center; 
 }
+
+.title-table {
+  margin-bottom: 30px;
+}
+
+.custom-table {
+  background-color: rgb(244, 244, 229);
+}
