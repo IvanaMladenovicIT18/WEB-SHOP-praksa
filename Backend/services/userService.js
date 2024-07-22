@@ -14,6 +14,17 @@ class UserService {
 
         return user;
     }
+
+    async login(email, password) {
+
+        const user = await UserRepository.findUserByEmail(email);
+
+        if (user && (await user.matchPassword(password))) {
+            return user;
+        }
+
+        throw new Error("Invalid email or password");
+    }
 }
 
 export default new UserService();

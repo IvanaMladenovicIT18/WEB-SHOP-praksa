@@ -58,4 +58,8 @@ User.beforeCreate(async (user) => {
     }
 });
 
+User.prototype.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
 export default User;
