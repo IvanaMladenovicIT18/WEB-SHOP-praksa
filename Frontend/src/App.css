@@ -344,3 +344,37 @@ textarea:focus {
 .custom-table {
   background-color: rgb(244, 244, 229);
 }
+
+/* LOGIN */
+
+.login {
+  background: rgb(244, 244, 229);
+  border-radius: 5px;
+  padding: 30px 30px 30px;
+  margin-bottom: 30px;
+}
+.login h1 {
+  text-align: center;
+}
+.login input {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: 2px solid #dcc9ac;
+  border-radius: 5px;
+}
+
+.login button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px 0;
+  background-color: #dcc9ac;
+  border: 0;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.login p {
+  margin-top: 30px;
+}
+
