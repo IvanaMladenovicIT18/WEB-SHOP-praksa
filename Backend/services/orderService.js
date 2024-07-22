@@ -4,6 +4,10 @@ import ProductRepository from './../repositories/productRepository.js';
 
 class OrderService {
 
+    async getAllOrdersByUser(userId) {
+        return await OrderRepository.findAllByUser(userId);
+    }
+
     async getOrderById(id) {
         return await OrderRepository.findOrderById(id);
     }
@@ -25,11 +29,11 @@ class OrderService {
 
         // prolazak kroz stavke iz korpe
         for (const product of products) {
-            const { productID, quantity } = product;
-            const productData = await ProductRepository.findById(productID);
+            const { id, quantity } = product;
+            const productData = await ProductRepository.findById(id);
 
             if (!productData) {
-                throw new Error(`Product with ID ${productID} not found`);
+                throw new Error(`Product with ID ${id} not found`);
             }
 
             const itemPrice = productData.price;
@@ -38,7 +42,6 @@ class OrderService {
             //kreiranje stavke porudzbine
             await OrderItemRepository.createOrderItem({
                 orderID: order.id,
-                productID,
                 quantity,
                 itemPrice
             });

@@ -3,6 +3,18 @@ import OrderService from './../services/orderService.js';
 
 class OrderController {
 
+    async getAllByUser(req, res) {
+        try {
+            const userId = 1; // kad uradim login --> promeni ovo
+            console.log(userId)
+            const orders = await OrderService.getAllOrdersByUser(userId);
+            res.json(orders);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
+
     async getById(req, res) {
         const order = await OrderService.getOrderById(req.params.id);
         if (order) {
