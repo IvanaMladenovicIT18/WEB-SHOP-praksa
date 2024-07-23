@@ -7,7 +7,15 @@ class UserController {
         try {
             const userData = req.body;
             const user = await UserService.registerUser(userData);
-            res.status(201).json(user);
+            res.status(201).json({
+                name: user.name,
+                surname: user.surname,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                address: user.address,
+                registrationDate: user. registrationDate,
+                token: generateToken(user.id), 
+            });
         } catch (error) {
             res.status(400).json({ error: error.message })
         }
