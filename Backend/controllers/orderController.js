@@ -26,7 +26,8 @@ class OrderController {
 
     async createOrder(req, res) {
         try {
-            const { userID, products } = req.body;
+            const userID = req.user.id;
+            const { products } = req.body;
             const result = await OrderService.createOrder(userID, products);
             res.status(201).json(result);
         } catch (error) {
