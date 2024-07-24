@@ -3,7 +3,7 @@ import orderController from '../controllers/orderController.js';
 
 const orderRouter = express.Router();
 
-orderRouter.get('/', orderController.getAllByUser);
+orderRouter.get('/user/:id', orderController.getAllByUser);
 orderRouter.get('/:id', orderController.getById);
 orderRouter.post('/', orderController.createOrder);
 

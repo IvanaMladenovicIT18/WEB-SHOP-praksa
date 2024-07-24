@@ -7,10 +7,10 @@ const useOrderStore = create((set) => ({
     loading: true,
     error: false,
 
-    getOrdersByUser: async () => {
+    getOrdersByUser: async (id) => {
         set({ loading: true });
         try {
-            const response = await fetch(`${API_BASE_URL}/orders`);
+            const response = await fetch(`${API_BASE_URL}/orders/user/${id}`);
             const data = await response.json();
             set({ orders: data, loading: false });
         } catch (error) {

@@ -26,6 +26,7 @@ class UserController {
             const { email, password } = req.body;
             const user = await UserService.login(email, password);
             res.json({
+                id: user.id,
                 name: user.name,
                 surname: user.surname,
                 email: user.email,

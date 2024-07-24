@@ -3,6 +3,7 @@ import useOrderStore from "../store/orderStore";
 import { useEffect, useState } from "react";
 import Footer from '../components/homeComponents/Footer';
 import Orders from "../components/profileComponents/Orders";
+import useUserStore from "../store/userStore";
 
 
 const ProfileScreen = () => {
@@ -10,10 +11,11 @@ const ProfileScreen = () => {
     const [showOrders, setShowOrders] = useState(false);
     const [showProfile, setShowProfile] = useState(true);
     const { orders, getOrdersByUser } = useOrderStore();
+    const { user } = useUserStore();
     console.log(orders)
 
     useEffect(() => {
-        getOrdersByUser();
+        getOrdersByUser(user.id);
         }, [getOrdersByUser]);
 
     const handleShowOrders = () => {

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import useCategoryStore from "../../store/categoryStore";
 import useProductStore from "../../store/productStore";
 import useCartStore from "../../store/cartStore";
+import useUserStore from "../../store/userStore";
 
 
 const Header = ({ onSelectCategory }) => {
@@ -12,6 +13,7 @@ const Header = ({ onSelectCategory }) => {
   const { categories, loading, error, getAllCategories, getCategoryById } = useCategoryStore();
   const { getAllProducts, getProductsByCategory } = useProductStore();
   const { cart } = useCartStore();
+  const { user, logout } = useUserStore();
   const [ selectedCategory, setSelectedCategory] = useState(null);
   
   useEffect(() => {
@@ -26,6 +28,10 @@ const Header = ({ onSelectCategory }) => {
       getAllProducts();
       setSelectedCategory(null); 
     }
+  };
+
+  const logoutHandler = () => {
+    logout();
   };
 
   return (
@@ -44,32 +50,34 @@ const Header = ({ onSelectCategory }) => {
                 
               </div> 
               <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
-                <div className="btn-group ml-auto">
-                <button
-                    type="button"
-                    className="name-button dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Korisnik
-                </button>
-                <div className="dropdown-menu">
-                    <Link className="dropdown-item" to="/profile">
-                    Profil
-                    </Link>
-
-                    <Link
-                    className="dropdown-item"
-                    to="/login"
-                    // onClick={logoutHandler}
-                    >
-                    Odjavi se
-                    </Link>
-                </div>
-                </div>
-                <Link to="/login">Prijava</Link>
-
+                { user ? (
+                  <div className="btn-group ml-auto">
+                  <button
+                      type="button"
+                      className="name-button dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                  >
+                      {user.name}
+                  </button>
+                  <div className="dropdown-menu">
+                      <Link className="dropdown-item" to="/profile">
+                      Profil
+                      </Link>
+  
+                      <Link
+                      className="dropdown-item"
+                      to="/login"
+                      onClick={logoutHandler}
+                      >
+                      Odjavi se
+                      </Link>
+                  </div>
+                  </div>
+                ) : (
+                  <Link to="/login">Prijava</Link>
+                )}
                 <Link to="/cart">
                   <i className="fas fa-shopping-bag"></i>
                   <span className="badge">{cart.length}</span>

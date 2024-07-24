@@ -5,8 +5,7 @@ class OrderController {
 
     async getAllByUser(req, res) {
         try {
-            const userId = 1; // kad uradim login --> promeni ovo
-            console.log(userId)
+            const userId = req.params.id; 
             const orders = await OrderService.getAllOrdersByUser(userId);
             res.json(orders);
         } catch (error) {
