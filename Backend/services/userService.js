@@ -25,6 +25,25 @@ class UserService {
 
         throw new Error("Invalid email or password");
     }
+
+    async updateUser(userId, userData) {
+        const user = await UserRepository.findById(userId);
+
+        if (user) {
+
+            userData.name = userData.name || user.name;
+            userData.surname = userData.surname || user.surname;
+            userData.phoneNumber = userData.phoneNumber || user.phoneNumber;
+            userData.address = userData.address || user.address;
+
+            const updatedUser = user.update(userData);
+
+            return updatedUser;
+        } else {
+            res.status(404);
+            throw new Error("User not found");
+        }
+    }
 }
 
 export default new UserService();

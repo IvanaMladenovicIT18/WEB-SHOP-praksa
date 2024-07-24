@@ -39,6 +39,27 @@ class UserController {
             res.status(401).json({ error: error.message });
         }
     }
+
+    async updateUser(req, res) {
+        try {
+            // const userId = req.user.id;
+            const { userData } = req.body;
+            const updatedUser = await UserService.updateUser(7, userData);
+            res.json({
+                id: updatedUser.id,
+                name: updatedUser.name,
+                surname: updatedUser.surname,
+                email: updatedUser.email,
+                phoneNumber: updatedUser.phoneNumber,
+                address: updatedUser.address,
+                registrationDate: updatedUser.registrationDate,
+                token: generateToken(updatedUser.id) 
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
 }
 
 export default new UserController();
