@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Footer from '../components/homeComponents/Footer';
 import Orders from "../components/profileComponents/Orders";
 import useUserStore from "../store/userStore";
+import ProfileInfo from "../components/profileComponents/ProfileInfo";
 
 
 const ProfileScreen = () => {
@@ -32,7 +33,7 @@ const ProfileScreen = () => {
         <>
             <Header/>
             <div className="container">
-                <div className="row mt-3">
+                <div className="row mt-3 mb-5">
                     <div className="col-md-12 mb-3 d-flex justify-content-center gap-2">
                         <button onClick={handleShowProfile} className="round-black-btn">
                             Profil
@@ -41,6 +42,11 @@ const ProfileScreen = () => {
                             Porudzbine
                         </button>
                     </div>
+                    {showProfile && (
+                        <div className="col-md-12 mt-3">
+                            <ProfileInfo />
+                        </div>
+                    )}
                     {showOrders && (
                         <div className="col-md-12 mt-3">
                             <Orders orders={orders} />
