@@ -11,6 +11,7 @@ import Order from "./models/OrderModel.js";
 import OrderItem from "./models/OrderItemModel.js";
 import orderRouter from "./routes/orderRoute.js";
 import userRouter from './routes/userRoute.js';
+import orderItemRouter from "./routes/ordemItemRoute.js";
 
 //dotenv.config();
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api/products', productRouter)
 app.use('/api/categories', categoryRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api', userRouter)
+app.use('/api/orderitems', orderItemRouter)
 
 // testing api
 app.get('/', (req, res) => {
