@@ -337,12 +337,24 @@ textarea:focus {
   justify-content: center; 
 }
 
+.table tr {
+  cursor: pointer;
+}
+
 .title-table {
   margin-bottom: 30px;
 }
 
 .custom-table {
   background-color: rgb(244, 244, 229);
+}
+
+.custom-table tr {
+  vertical-align: middle;
+}
+
+.order-item-img {
+   width: 100px;
 }
 
 /* LOGIN */

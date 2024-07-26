@@ -66,6 +66,7 @@ const CartScreen = () => {
 
         if (result) {
             setNotification({ message: 'Porudzbina uspesno kreirana!', type: 'success' });
+            navigate('/profile');
             clearCart();
             const modalElement = modalRef.current;
             if (modalElement) {

@@ -43,7 +43,8 @@ class OrderService {
             await OrderItemRepository.createOrderItem({
                 orderID: order.id,
                 quantity,
-                itemPrice
+                itemPrice,
+                productID: product.id
             });
         }
 
