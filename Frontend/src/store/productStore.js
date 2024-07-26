@@ -26,7 +26,6 @@ const useProductStore = create((set) => ({
           const response = await fetch(`${API_BASE_URL}/products/${id}`);
           const data = await response.json();
           set({ product: data, loading: false });
-        //   return data;
         } catch (error) {
           set({ error: error.message, loading: false });
         }

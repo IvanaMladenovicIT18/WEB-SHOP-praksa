@@ -17,7 +17,7 @@ const Orders = (props) => {
         <> 
         <div className="row mb-5">
             <div className="col-md-6">
-                <h3>Vase porudzbine</h3>
+                <h3>Vaše porudžbine</h3>
                 <table className="table table-hover table-striped">
                     <thead>
                         <tr>
@@ -46,14 +46,14 @@ const Orders = (props) => {
             <div className="col-md-6">
             {selectedOrderId && (
                 <div>
-                    <h3>Stavke porudzbine ID-{selectedOrderId}</h3>
+                    <h3>Stavke porudžbine ID-{selectedOrderId}</h3>
                         <table className="table table-hover table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">Slika</th>
                                     <th scope="col">Naziv proizvoda</th>
-                                    <th scope="col">Velicina</th>
-                                    <th scope="col">Kolicina</th>
+                                    <th scope="col">Veličina</th>
+                                    <th scope="col">Količina</th>
                                     <th scope="col">Cena/kom</th>
                                 </tr>
                             </thead>

@@ -26,7 +26,7 @@ const ProfileInfo = () => {
 
         try {
             await updateUser(userData);
-            setNotification({ message: 'Profil azuriran!', type: 'success' });
+            setNotification({ message: 'Profil ažuriran!', type: 'success' });
             setTimeout(() => setNotification(null), 5000);
         } catch (error) {
             setNotification({ type: 'danger', message: 'Neispravni format podataka' });
@@ -38,7 +38,7 @@ const ProfileInfo = () => {
     return (
         <> 
             <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-6">
                     <h3 className="mb-2">Informacije o korisniku</h3>
                     <div className="login">
                         <div className="user-cart row">
@@ -84,7 +84,7 @@ const ProfileInfo = () => {
                     </div>
                 </div>
 
-                <div className="col-md-7">
+                <div className="col-md-6">
                     <h3 className="mb-2">Izmeni</h3>
                     <form 
                         className="login"
@@ -122,7 +122,7 @@ const ProfileInfo = () => {
                             onChange={(e) => setAddress(e.target.value)}
                             required
                         />
-                        <button type="submit">Sacuvaj promene</button>
+                        <button type="submit">Sačuvaj promene</button>
                     </form>
                     {notification && (
                         <div className={`alert alert-${notification.type} fixed-top mb-0`} role="alert">

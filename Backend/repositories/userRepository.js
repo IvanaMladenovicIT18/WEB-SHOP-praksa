@@ -1,4 +1,3 @@
-
 import User from './../models/UserModel.js';
 
 class UserRepository {
