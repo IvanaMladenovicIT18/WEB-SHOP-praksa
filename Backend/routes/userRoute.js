@@ -1,4 +1,3 @@
-
 import express from 'express';
 import userController from '../controllers/userController.js';
 import protect from './../middleware/Auth.js';

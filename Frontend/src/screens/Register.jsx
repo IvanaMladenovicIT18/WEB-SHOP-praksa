@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/homeComponents/Header"
 import { useState } from "react";
 import useUserStore from "../store/userStore";
@@ -16,10 +16,13 @@ const Register = () => {
 
     const { register } = useUserStore();
 
+    const navigate = useNavigate();
+
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
             await register(name, surname, phoneNumber, address, email, password);
+            navigate('/');
         } catch (err) {
             setNotification({ type: 'danger', message: err.message });
             setTimeout(() => setNotification(null), 5000);
@@ -78,9 +81,9 @@ const Register = () => {
                         required
                     />
                     <button type="submit">Registruj se</button>
-                    <p>
-                        <Link to={"/login"}>
-                            Vec imas nalog? Prijavi se
+                    <p> Već imaš nalog?
+                        <Link to={"/login"} className="register-link">
+                            Prijavi se
                         </Link>
                     </p>
                 </form>

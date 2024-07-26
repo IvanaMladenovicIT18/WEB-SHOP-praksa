@@ -48,9 +48,9 @@ const Login = () => {
                         required
                     />
                     <button type="submit">Prijavi se</button>
-                    <p>
-                        <Link to={"/register"}>
-                            Nemas nalog? Registruj se
+                    <p> Nemaš nalog?
+                        <Link to={"/register"} className="register-link">
+                             Registruj se
                         </Link>
                     </p>
                 </form>

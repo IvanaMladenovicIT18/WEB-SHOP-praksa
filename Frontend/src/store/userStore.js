@@ -69,13 +69,12 @@ const useUserStore = create((set) => ({
     updateUser: async (userData) => {
         try {
             set({ error: null });
-            console.log(userData)
 
-            const response = await fetch(`${API_BASE_URL}/users/profile`, { // Zameni '7' sa pravim ID-om korisnika
+            const response = await fetch(`${API_BASE_URL}/users/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}` // Dodaj token ako je potreban za autorizaciju
+                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
                 },
                 body: JSON.stringify(userData)
             });
@@ -86,7 +85,7 @@ const useUserStore = create((set) => ({
             }
 
             const data = await response.json();
-            localStorage.setItem('user', JSON.stringify(data)); // Ažuriraj podatke u localStorage
+            localStorage.setItem('user', JSON.stringify(data));
             set({ user: data });
         } catch (error) {
             set({ error: error.message });

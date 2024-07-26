@@ -65,7 +65,7 @@ const CartScreen = () => {
         const result = await createOrder(userId, cart);
 
         if (result) {
-            setNotification({ message: 'Porudzbina uspesno kreirana!', type: 'success' });
+            setNotification({ message: 'Porudžbina uspešno kreirana!', type: 'success' });
             navigate('/profile');
             clearCart();
             const modalElement = modalRef.current;
@@ -75,7 +75,7 @@ const CartScreen = () => {
             }
             setTimeout(() => setNotification(null), 5000);
         } else {
-            console.error('Kreiranje porudzbine nije uspelo: Nema rezultata');
+            console.error('Kreiranje porudžbine nije uspelo: Nema rezultata');
         }
     };
 
@@ -93,7 +93,7 @@ const CartScreen = () => {
             <div className="container">
                 <div className="row mt-3">
                     <div className="col-md-7 mb-5">
-                        <h3>Vasa korpa</h3>
+                        <h3>Vaša korpa</h3>
                         <div className="cart-item row">
                             <div className="col-md-2 d-flex align-items-center justify-content-center">
                                 <h5>Slika</h5>
@@ -134,7 +134,7 @@ const CartScreen = () => {
                         ))}
                     </div>
                     <div className="col-md-5 mb-5">
-                        <h3>Pregled porudzbine</h3>
+                        <h3>Pregled porudžbine</h3>
 
                         <div className="cart-item row">
                             <div className="col-md-6">
@@ -177,7 +177,7 @@ const CartScreen = () => {
                             onClick={handleClick}
                               className="round-black-btn"
                             >
-                              Kreiraj porudzbinu
+                              Kreiraj porudžbinu
                         </button>      
                         )}
                         {notification && (

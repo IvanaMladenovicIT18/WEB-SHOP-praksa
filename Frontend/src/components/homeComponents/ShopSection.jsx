@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useProductStore from "../../store/productStore.js";
 
 const ShopSection = () => {
 
-    const { products, loading, error, getAllProducts, getProductsByCategory } = useProductStore();
-    console.log(products)
+    const { products, loading, error, getAllProducts } = useProductStore();
 
     useEffect(() => {
         getAllProducts();

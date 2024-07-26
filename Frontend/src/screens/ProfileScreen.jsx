@@ -13,7 +13,6 @@ const ProfileScreen = () => {
     const [showProfile, setShowProfile] = useState(true);
     const { orders, getOrdersByUser } = useOrderStore();
     const { user } = useUserStore();
-    console.log(orders)
 
     useEffect(() => {
         getOrdersByUser(user.id);
@@ -39,7 +38,7 @@ const ProfileScreen = () => {
                             Profil
                         </button>
                         <button onClick={handleShowOrders} className="round-black-btn">
-                            Porudzbine
+                            Porudžbine
                         </button>
                     </div>
                     {showProfile && (

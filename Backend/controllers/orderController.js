@@ -1,6 +1,5 @@
 import OrderService from './../services/orderService.js';
 
-
 class OrderController {
 
     async getAllByUser(req, res) {

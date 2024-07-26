@@ -3,7 +3,6 @@ import UserRepository from '../repositories/userRepository.js'
 class UserService {
 
     async registerUser(userData) {
-
         const userExists = await UserRepository.findUserByEmail(userData.email);
 
         if (userExists) {
@@ -16,7 +15,6 @@ class UserService {
     }
 
     async login(email, password) {
-
         const user = await UserRepository.findUserByEmail(email);
 
         if (user && (await user.matchPassword(password))) {

@@ -50,7 +50,7 @@ const SingleProduct = () => {
                         <div className="product-name">{product.name}</div>
                       </div>
                       <p>Opis: {product.description}</p>
-                      <p>Velicina: {product.size}</p>
+                      <p>Veličina: {product.size}</p>
     
                       <div className="product-count col-lg-7 ">
                         <div className="flex-box d-flex justify-content-between align-items-center">
@@ -68,7 +68,7 @@ const SingleProduct = () => {
                         {product.availableQuantity > 0 ? (
                           <>
                             <div className="flex-box d-flex justify-content-between align-items-center">
-                              <h6>Kolicina</h6>
+                              <h6>Količina</h6>
                               <select
                                 value={qty}
                                 onChange={(e) => setQty(e.target.value)}

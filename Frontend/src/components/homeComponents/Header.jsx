@@ -6,7 +6,7 @@ import useCartStore from "../../store/cartStore";
 import useUserStore from "../../store/userStore";
 
 
-const Header = ({ onSelectCategory }) => {
+const Header = () => {
 
   const location = useLocation();
 

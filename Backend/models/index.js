@@ -1,4 +1,4 @@
-import {Sequelize, DataTypes} from 'sequelize'
+import {Sequelize} from 'sequelize'
 import dbConfig from '../config/dbConfig.js'
 
 const sequelize = new Sequelize(
@@ -21,13 +21,5 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
-// db.sequelize.sync({ force: true })
-//   .then(() => {
-//     console.log("Database & tables created!");
-//   })
-//   .catch(err => {
-//     console.log("Error creating database & tables:", err);
-//   });
 
 export default sequelize;
