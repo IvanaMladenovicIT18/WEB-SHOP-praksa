@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/homeComponents/Header";
 import useCartStore from "../store/cartStore";
 import Footer from "../components/homeComponents/Footer";
 import { useRef, useState } from "react";
 import ConfirmationDialog from "./ConfirmationDialog";
 import useOrderStore from "../store/orderStore";
+import useUserStore from "../store/userStore";
 
 const CartScreen = () => {
 
     const { cart, updateQuantity, deleteQuantity, clearCart } = useCartStore();
     const { createOrder, error, order } = useOrderStore();
+    const { user } = useUserStore();
     const modalRef = useRef(null);
+    const navigate = useNavigate();
     const [notification, setNotification] = useState(null);
 
     const formattedNumber = (price) => {
@@ -40,6 +43,14 @@ const CartScreen = () => {
         deleteQuantity(id);
     }
 
+    const handleClick = () => {
+        if (user) {
+            handleOpenModal();
+        } else {
+            navigate('/login');
+        }
+    };
+
     const handleOpenModal = () => {
         const modalElement = modalRef.current;
         if (modalElement) {
@@ -49,7 +60,7 @@ const CartScreen = () => {
     };
 
     const handleSaveChanges = async () => {
-        const userId = '1'; // kad uradim logovanje - zameni sa ulogovanim korisnikom
+        const userId = user.id;
         
         const result = await createOrder(userId, cart);
 
@@ -132,13 +143,14 @@ const CartScreen = () => {
                                 <h5>{formattedNumber(totalPrice)}</h5>
                             </div>
                         </div>
+                        { user && (
                         <div className="cart-item">
                             <div className="user-cart row">
                                 <div className="col-md-3">
                                     <h6>Korisnik:</h6>
                                 </div>
                                 <div className="col-md-9 text-end">
-                                    <h6>Marko Markovic</h6>
+                                    <h6>{user.name} {user.surname}</h6>
                                 </div>
                             </div>
                             <div className="user-cart row">
@@ -146,7 +158,7 @@ const CartScreen = () => {
                                     <h6>Mail:</h6>
                                 </div>
                                 <div className="col-md-9 text-end">
-                                    <h6>markomark@example.com</h6>
+                                    <h6>{user.email}</h6>
                                 </div>
                             </div>
                             <div className="user-cart row">
@@ -154,13 +166,14 @@ const CartScreen = () => {
                                     <h6>Adresa:</h6>
                                 </div>
                                 <div className="col-md-9 text-end">
-                                    <h6>Bulevar oslobodjenja 59, Novi Sad</h6>
+                                    <h6>{user.address}</h6>
                                 </div>
                             </div>  
                         </div>
+                        )}
                         {cart.length > 0 && (
                             <button
-                              onClick={handleOpenModal}
+                            onClick={handleClick}
                               className="round-black-btn"
                             >
                               Kreiraj porudzbinu

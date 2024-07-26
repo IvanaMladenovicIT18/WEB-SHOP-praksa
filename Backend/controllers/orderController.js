@@ -5,8 +5,7 @@ class OrderController {
 
     async getAllByUser(req, res) {
         try {
-            const userId = 1; // kad uradim login --> promeni ovo
-            console.log(userId)
+            const userId = req.params.id; 
             const orders = await OrderService.getAllOrdersByUser(userId);
             res.json(orders);
         } catch (error) {
@@ -27,7 +26,8 @@ class OrderController {
 
     async createOrder(req, res) {
         try {
-            const { userID, products } = req.body;
+            const userID = req.user.id;
+            const { products } = req.body;
             const result = await OrderService.createOrder(userID, products);
             res.status(201).json(result);
         } catch (error) {
